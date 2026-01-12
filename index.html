@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mäxchen</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;600;700&family=Inter:wght@400;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">
+        <div id="setup-screen" class="overlay">
+            <div class="modal">
+                <h2>Neues Spiel</h2>
+
+                <div class="form-group">
+                    <label>Spielmodus</label>
+                    <div class="mode-select">
+                        <button class="btn-mode active" data-mode="classic">Klassisch (Trinken)</button>
+                        <button class="btn-mode" data-mode="kids">Punkte (Kinder)</button>
+                    </div>
+                </div>
+
+                <div class="form-group" id="player-setup-group">
+                    <label>Spielernamen</label>
+                    <div id="player-input-list">
+                        <input type="text" placeholder="Spieler 1" class="inp-name" value="Spieler 1">
+                        <input type="text" placeholder="Spieler 2" class="inp-name" value="Spieler 2">
+                    </div>
+                    <button id="btn-add-player" class="btn-small">+ Spieler hinzufügen</button>
+                </div>
+
+                <button id="btn-start-game" class="btn primary">SPIEL STARTEN</button>
+            </div>
+        </div>
+
+        <header>
+            <div class="header-left">
+                <h1>MÄXCHEN</h1>
+                <button id="btn-help" class="btn-icon">?</button>
+            </div>
+            <div id="turn-indicator"></div>
+        </header>
+
+        <main>
+            <div id="match-info" class="hidden">
+                <div id="scoreboard"></div>
+            </div>
+            <div id="game-area">
+                <div id="cup-container">
+                    <div id="cup">
+                    </div>
+                    <div id="dice-container" class="hidden">
+                        <div class="die" id="die1">?</div>
+                        <div class="die" id="die2">?</div>
+                    </div>
+                </div>
+                <div id="message-display">WÜRFELN!</div>
+            </div>
+
+            <div id="info-panel">
+                <div class="stat-box">
+                    <span class="label">Aktuelles Gebot</span>
+                    <span id="current-claim" class="value">-</span>
+                </div>
+            </div>
+
+            <div id="control-panel">
+                <!-- Phase 1: Roll -->
+                <button id="btn-roll" class="btn primary large">WÜRFELN</button>
+
+                <!-- Phase 2: Peek/Action -->
+                <div id="action-buttons" class="hidden">
+                    <button id="btn-peek" class="btn secondary">UNTER DEN BECHER SCHAUEN</button>
+                    <button id="btn-reveal" class="btn danger">AUFDECKEN</button>
+                </div>
+
+                <!-- Phase 3: Claim -->
+                <div id="claim-controls" class="hidden">
+                    <div class="claim-inputs">
+                        <button class="btn-numpad" data-val="1">1</button>
+                        <button class="btn-numpad" data-val="2">2</button>
+                        <button class="btn-numpad" data-val="3">3</button>
+                        <button class="btn-numpad" data-val="4">4</button>
+                        <button class="btn-numpad" data-val="5">5</button>
+                        <button class="btn-numpad" data-val="6">6</button>
+                    </div>
+                    <button id="btn-submit-claim" class="btn primary">BIETEN & WEITER</button>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <a href="https://github.com/waldfrucht82/mAIxchen" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://hoeres.net/imprint.html" target="_blank" rel="noopener">Impressum</a>
+            <a href="https://hoeres.net/datenschutz.html" target="_blank" rel="noopener">Datenschutz</a>
+        </footer>
+
+        <div id="help-modal" class="overlay hidden">
+            <div class="modal">
+                <button id="btn-close-help" class="btn-close">&times;</button>
+                <h2>Spieleanleitung</h2>
+                <div class="help-content">
+                    <h3>Die Regeln</h3>
+                    <p>Mäxchen ist ein Würfelspiel für beliebig viele Personen.</p>
+
+                    <h4>Würfelwerte</h4>
+                    <ul>
+                        <li><strong>21 (Mäxchen):</strong> Der höchste Wurf. Wird er aufgedeckt (oder angezweifelt und
+                            liegt wirklich), müssen <strong>alle anderen</strong> trinken (oder verlieren ein Leben).
+                        </li>
+                        <li><strong>Pasch:</strong> 11, 22, 33, 44, 55, 66 (höher als normale Zahlen).</li>
+                        <li><strong>Zahlen:</strong> Die höhere Augenzahl wird immer zuerst genannt (z.B. 5 und 3 = 53).
+                        </li>
+                    </ul>
+
+                    <h4>Ablauf</h4>
+                    <ol>
+                        <li>Der erste Spieler würfelt verdeckt.</li>
+                        <li>Er schaut unter den Becher und nennt ein beliebiges Gebot.</li>
+                        <li>Der nächste Spieler kann <strong>glauben</strong> oder <strong>anzweifeln</strong>.</li>
+                        <li>Beim Glauben muss er selbst würfeln und ein <strong>höheres</strong> Gebot abgeben.</li>
+                        <li>Beim Anzweifeln wird aufgedeckt. Wer Unrecht hat, verliert (oder trinkt).</li>
+                    </ol>
+                </div>
+                <button id="btn-help-ok" class="btn primary">VERSTANDEN</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
